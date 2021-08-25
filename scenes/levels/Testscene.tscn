@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/backgrounds/background.png" type="Texture" id=1]
+[ext_resource path="res://assets/backgrounds/border.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/actors/wagner.png" type="Texture" id=4]
+[ext_resource path="res://scenes/dialogue/DialogueBox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/levels/Testscene.gd" type="Script" id=6]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 162.135, 403.799 )
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 202.587, 518.936, 0, 0, 0, 0, 824.895, 518.18 )
+}
+
+[node name="Testscene" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 63.5677, 86.876 )
+scale = Vector2( 0.834142, 0.834142 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="wagner" type="Sprite" parent="."]
+position = Vector2( 644.485, 468.852 )
+scale = Vector2( 0.171717, 0.171717 )
+texture = ExtResource( 4 )
+
+[node name="wagner_dialogue" type="Area2D" parent="wagner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wagner/wagner_dialogue"]
+position = Vector2( 10.376, 7.78198 )
+shape = SubResource( 2 )
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="Path1" type="Path2D" parent="Paths"]
+curve = SubResource( 1 )
+
+[node name="Player" parent="Paths/Path1" instance=ExtResource( 3 )]
+position = Vector2( 202.587, 518.936 )
+
+[node name="Border" type="Sprite" parent="."]
+position = Vector2( -146.963, -166.946 )
+scale = Vector2( 0.477805, 0.47723 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogueBox" parent="Control" instance=ExtResource( 5 )]
+visible = false
